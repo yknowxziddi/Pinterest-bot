@@ -101,7 +101,8 @@ class PinterestDownloader:
         self.wolf_u_dwn[wolf_c_id].append({
             'url': wolf_o_url,
             'type': wolf_m_type
-            'timestamp': WOLF_DTM.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            timestamp := WOLF_DTM.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
         })
 
         for wolf_fpt in wolf_fls:
