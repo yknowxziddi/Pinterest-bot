@@ -1,8 +1,14 @@
-# handlers.py
-
 import json
+import os
 from telebot import types
-from config import ADMIN_ID, DEVELOPER_LINK, CHANNEL_USERNAME
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+ADMIN_ID = int(os.getenv("ADMIN_ID"))
+DEVELOPER_LINK = os.getenv("DEVELOPER_LINK")
+CHANNEL_USERNAME = os.getenv("CHANNEL_USERNAME")
 
 USERS_FILE = 'users.json'
 
@@ -28,20 +34,17 @@ def handle_start(bot, message):
     user_id = message.from_user.id
     user_name = message.from_user.first_name
 
-    # Check membership
     if not check_membership(bot, user_id):
         join_btn = types.InlineKeyboardMarkup()
         join_btn.add(types.InlineKeyboardButton("Join Channel", url=f"https://t.me/{CHANNEL_USERNAME}"))
         bot.send_message(user_id, "Please join our channel to use this bot.", reply_markup=join_btn)
         return
 
-    # Add user to users.json if new
     users = load_users()
     if user_id not in users:
         users.append(user_id)
         save_users(users)
 
-        # New user notification to admin
         bot.send_message(
             ADMIN_ID,
             f"📢 New User Alert!\n"
@@ -51,12 +54,11 @@ def handle_start(bot, message):
             f"Total Users: {len(users)}"
         )
 
-    # Send main menu
     keyboard = types.InlineKeyboardMarkup()
     keyboard.add(types.InlineKeyboardButton("Developer", url=DEVELOPER_LINK))
     bot.send_photo(
         chat_id=user_id,
-        photo="https://i.ibb.co/0yzZHrjc/image.jpg",
+        photo="https://i.ibb.co/4RkNdPdT/image.png",
         caption=f"Hello {user_name}! 👋\n\nWelcome to Pinterest Downloader Bot.\n\nRights reserved © {DEVELOPER_LINK}",
         reply_markup=keyboard
     )
