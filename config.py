@@ -1,0 +1,7 @@
+# config.py
+
+BOT_TOKEN = "YOUR_BOT_TOKEN"
+CHANNEL_USERNAME = "YOUR_CHANNEL_USERNAME"  # Without @
+
+ADMIN_ID = 1234567890  # Your Telegram ID
+DEVELOPER_LINK = "https://t.me/YOUR_USERNAME"
