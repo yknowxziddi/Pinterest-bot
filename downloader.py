@@ -100,9 +100,8 @@ class PinterestDownloader:
             self.wolf_u_dwn[wolf_c_id] = []
         self.wolf_u_dwn[wolf_c_id].append({
             'url': wolf_o_url,
-            'type': wolf_m_type
-            timestamp := WOLF_DTM.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-
+            'type': wolf_m_typ,
+            'timestamp': WOLF_DTM.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         })
 
         for wolf_fpt in wolf_fls:
@@ -142,7 +141,6 @@ class PinterestDownloader:
         except Exception as wolf_e:
             self.wolf_bot.send_message(wolf_c_id, f"Oops, an error occurred:\n`{wolf_e}`")
 
-    # This method used in main.py
     def handle_message(self, wolf_msg):
         wolf_url = wolf_msg.text.strip()
         if WOLF_RE.search(r"pinterest\.com|pin\.it", wolf_url):
